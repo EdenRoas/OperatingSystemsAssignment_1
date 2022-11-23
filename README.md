@@ -2,7 +2,7 @@
 
 ### here we will put the script
 
-## The URL We Used :
+## THE URL WE USED :
 + **Copy**:
 
  https://stackoverflow.com/questions/3984948/how-to-figure-out-if-a-file-is-a-link
