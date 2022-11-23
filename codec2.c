@@ -4,119 +4,74 @@
 #include <math.h>
 
 
-char * toBinary(char letter)
+int encode(char * src, char *dst, int len)
 {
-    int decimal = (int) letter;
-    //https://indepth.dev/posts/1019/the-simple-math-behind-decimal-binary-conversion-algorithms
-    char * binary;
-    for (int i = 0; decimal > 0; i++)
+    char str[5];
+    int ascival;
+    for (int i = 0; i < len; i++)
     {
-        binary[i] = (char)(decimal % 2);
-        printf("%c\n", binary[i]);
-        decimal = decimal / 2;
-    }
-    return binary;
-}
-
-char * NEG(char letter)
-{
-    char * binaryNumber = toBinary(letter);
-    //NEG calcluation means doing not to the binary number and then addinf 1
-    char * NEGnum;
-    //not(binaryNum) - turning every 1 to 0 and every 0 to 1
-    for (int i = 0; i < strlen(binaryNumber); i++)
-    {
-        if (binaryNumber[i] == '0')
-        {
-            NEGnum[i] = 1;
-        }
-        else
-        {
-            NEGnum[i] = 0;
-        }  
-    }
-    //adding 1 to the binary number
-    int i = strlen(NEGnum) - 1;
-    if (NEGnum[i] == '0')
-    {
-        NEGnum[i] = 1;
-    }
-    else
-    {
-        while (NEGnum[i] != '0')
-        {
-            NEGnum[i] = 0;
-            i--;
-        }
-        NEGnum[i] = 1;
-    }
-    return NEGnum;
-}
-
-int encode(char * src, char * dst, int len)
-{
-    int k = 0;
-    char ch;
-    char * negNum;
-    for (int i = 0; i < strlen(src); i++)
-    {
-        ch = src[i];
-        negNum = NEG(ch);
-        for (int j = 0; j < strlen(negNum); j++)
-        {
-            dst[k] = negNum[j];
-            k++;
-        }
+        ascival = (int)src[i];
+        ascival = (((-1)*ascival) + 1);
+        sprintf(str, "%d", ascival); //https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
+        strcat(dst, str);//https://www.educative.io/blog/concatenate-string-c
     }
     return 1;
 }
 
-char * DINEG(char * negNumber)
-{
-    //this function gets a NEG calcluate and conver it to a regular decimal that is she missing one and then doing not.
-
-
-}
-
-int NEGtoBinary(char * numToDineg)
-{
-    char * diNeg = DINEG(numToDineg);
-    //i is for the power of th 2 while calcluating the binary number
-    //k reprisent our prograss on the binary number diNeg
-    //decimal holds the final results of the decimal number
-    //dec holds the value of the 1 or 0 each iteration
-    int i = strlen(diNeg) - 1, k = 0, decimal = 0, dec;
-    while (i >= 0)
-    {
-        dec = (int)diNeg[k] - 48;
-        decimal += (dec * pow(2, i));
-        k++;
-        i--;
-    }
-    return decimal;
-}
-
 int decode(char * src, char * dst, int len)
-{
-    char ch;
-    for (int i = 0; i < len; i++)
-    {
+{   
+    char * str = malloc(sizeof(char) * 5);
+    str[0] = '-';
+    int j = 1, conv, i = 1, indexd = 0;
+    while(i < len)
+    {   
         
+        if(src[i] == '-' )
+        {
+            j=1;
+            conv = atoi(str); //https://www.educative.io/answers/how-to-convert-a-string-to-an-integer-in-c
+            conv = (((-1) * conv) + 1);
+            dst[indexd] = (char)conv;
+            indexd++;
+            str[3] = '\0';
+            
+        }
+        else
+        {
+            str[j] = src[i];
+            j++;
+        }
+        i++;
+        if (i == len){
+            conv = atoi(str); //https://www.educative.io/answers/how-to-convert-a-string-to-an-integer-in-c
+            conv = (((-1) * conv) + 1);
+            dst[indexd] = (char)conv;
+            indexd++;
+        }
+         
     }
-    
+   
+    dst[indexd] = '\0';
+    return 1;
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
-    // char ch = 'A';
-    // int decimal = toAscii(ch);
-    // char * binary;
-    // for (int i = 0; decimal > 0; i++)
-    // {
-    //     binary[i] = (char)(decimal % 2);
-    //     printf("%c\n", binary[i]);
-    //     decimal = decimal / 2;
-    // }
-    // printf("%s\n", binary);
+    int len = strlen(argv[1]);
+    char * msgToEncode = malloc(len * 5);
+    char msgToDecode[len];
+    encode(argv[1], msgToEncode, len);
+    for (int i = 0; i < strlen(msgToEncode); i++)
+    {
+        printf("%c", msgToEncode[i]);
+    }
+    //printf("%d\n" , str);
+    printf("\n");
+    decode(msgToEncode,msgToDecode,strlen(msgToEncode));
+    for (int i = 0; i < strlen(msgToDecode); i++)
+    {
+        printf("%c", msgToDecode[i]);
+    }
+    printf("\n");
     return 0;
 }
