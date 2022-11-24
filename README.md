@@ -3,7 +3,7 @@
 ### How to run the code:
 cmp-
 we have the next files
-file:///home/hadarb/Downloads/WhatsApp%20Image%202022-11-24%20at%2017.05.47.jpeg![image](https://user-images.githubusercontent.com/86705118/203871314-94d0df40-6f50-4006-888e-24d539fc2951.png)
+file:///home/hadarb/Downloads/WhatsApp%20Image%202022-11-24%20at%2017.05.47.jpeg![image]
 file:///home/hadarb/Downloads/WhatsApp%20Image%202022-11-24%20at%2017.07.35.jpeg![image](https://user-images.githubusercontent.com/86705118/203871336-4d1fbbed-12b0-4e0e-abf6-d31d0399cc18.png)
 file:///home/hadarb/Downloads/WhatsApp%20Image%202022-11-24%20at%2017.08.14.jpeg![image](https://user-images.githubusercontent.com/86705118/203871359-71bb2d81-7302-48ee-bf2b-6cce820e5418.png)
 the program running
