@@ -63,3 +63,7 @@ The file created after the prgram running:
  + **Encode.c & Decode.c**:
  * https://man7.org/linux/man-pages/man3/dlsym.3.html 
  * https://man7.org/linux/man-pages/man3/dlopen.3.html 
+
+
+  + **Codec.h**:
+  * https://www.quora.com/How-do-you-fix-a-redefinition-error-in-C-programming
