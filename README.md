@@ -15,10 +15,19 @@
  * https://www.informit.com/articles/article.aspx?p=23618&seqNum=12
  * https://pubs.opengroup.org/onlinepubs/009696699/functions/readlink.html
   
- + **Codec2.c**:
+ **Codec2.c**:
+ 
+ What did we understand that was supposed to be done in codec2?
+ 
+ **Encode** - Receive a string, go through it letter by letter and swapping it to its ASCII value, change it(/turn it) to its negative value, add one and return those values as a string.
+ 
+**Decode** - Receiving the string that came from the encode function , in order of reaching the original string, meaning : multiplying by minus            1,adding 1 and looking for the char by the ASCII value, returning the string.
  
   * https://stackoverflow.com/questions/8257714/how-to-convert-an-int-to-string-in-c
   * https://www.educative.io/blog/concatenate-string-c
   * https://www.educative.io/answers/how-to-convert-a-string-to-an-integer-in-c
   * https://www.educative.io/answers/how-to-convert-a-string-to-an-integer-in-c
 
+ + **Encode.c & Decode.c**:
+ * https://man7.org/linux/man-pages/man3/dlsym.3.html 
+ * https://man7.org/linux/man-pages/man3/dlopen.3.html 
