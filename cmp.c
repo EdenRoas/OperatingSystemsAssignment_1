@@ -6,7 +6,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void main(int argc, char * argv[])
+int main(int argc, char * argv[])
 {
     if(argc != 3)
     {
@@ -52,7 +52,7 @@ void main(int argc, char * argv[])
     while (1)
     {
         c1 = file1[index];//gets a char from file 1
-        c2 = file2[index];//gets a char from file 2
+        c2 = file2[index];//gets a char from file 2
         //check if the two chars from both files are not the same then change the flag to false and exit the loop
         if(c1 != c2)
         {
@@ -80,5 +80,7 @@ void main(int argc, char * argv[])
     }
 
     close(f1);
-    close(f2);
+    close(f2);
+
+    return 0;
 }

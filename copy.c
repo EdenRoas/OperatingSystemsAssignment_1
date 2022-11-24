@@ -6,6 +6,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+//the command to create a symbolic link for a file is: ln -s Source_File.txt symbilic_Link.txt 
+//to check if the link was created we use: ls -l symbilic_Link.txt (the file name can be change)
+
 void regularCopy(char * src, char * dst)
 {
     char * pathSrcFile = realpath(src, NULL); //gettin full path of the file we want to copy
@@ -44,9 +47,9 @@ int isLink(char * file)
     //the idea for the code is from the site: https://stackoverflow.com/questions/3984948/how-to-figure-out-if-a-file-is-a-link
     //and the site: http://codewiki.wikidot.com/c:system-calls:lstat
     struct stat buf;
-    int x;
+
     //checks if the file is link or not 1 says is link 0 says not link
-    x = lstat (file, &buf);
+    lstat (file, &buf);
     if (S_ISLNK(buf.st_mode)) return 1;
     else return 0;
 }
@@ -58,7 +61,7 @@ int isContainL(int argc, char *argv[])
     //https://www.gnu.org/software/libc/manual/html_node/Example-of-Getopt.html
     //https://pubs.opengroup.org/onlinepubs/009696799/functions/getopt.html
     //https://www.geeksforgeeks.org/getopt-function-in-c-to-parse-command-line-arguments/
-   int c = getopt(argc, argv, "l:");
+   int c = getopt(argc, argv, ":if:lrx");
    if(c == 'l') return 1;
    else return 0;
 }
@@ -67,21 +70,28 @@ void copyLink(char * src, char * dst)
 {
     //for this function we used this site: https://pubs.opengroup.org/onlinepubs/009696699/functions/symlink.html
     //and this site: https://www.ibm.com/docs/en/zos/2.4.0?topic=functions-symlink-create-symbolic-link-path-name#rtsym
-   
-    if (symlink(src, dst) != 0)
+     //int f2 = open (dst, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU); //open the file to where we want to copy for writing and if it dose not exist create it
+    int len;
+    int sizeFile = 256;
+    char * dstFile = malloc(sizeFile); //creating a string to put the content of the file when we read it
+    if ((len = readlink(src, dstFile, sizeFile)) != 0)
+    {
+        dstFile[len] = '\0';
+    }
+    if (symlink(dstFile, dst) != 0)
     {
         perror("symlink() error");
-        unlink(src);
+        unlink(dst);
     }
     else
     {
         printf("link is copied.\n");
-        unlink(dst);
     }
 }
 
 void copyConten(char * src, char * dst)
 {
+    //egularCopy(src, dst);
     //in this function we used this sites: https://www.informit.com/articles/article.aspx?p=23618&seqNum=12
     //https://pubs.opengroup.org/onlinepubs/009696699/functions/readlink.html
     int f2 = open (dst, O_RDWR | O_CREAT | O_TRUNC, S_IRWXU); //open the file to where we want to copy for writing and if it dose not exist create it
@@ -91,17 +101,20 @@ void copyConten(char * src, char * dst)
         printf("couldn't open destination file\n");
         exit(1);
     }
-    // int sizeBuf = 1024;
     int len;
     int sizeFile = 256;
     char * dstFile = malloc(sizeFile); //creating a string to put the content of the file when we read it
+    memset(dstFile,'\0',sizeFile);
     if ((len = readlink(src, dstFile, sizeFile)) != -1)
+    {
         dstFile[len] = '\0';
+    }
+    regularCopy(dstFile, dst);
 }
 
 int main(int argc, char *argv[])
 {
-    if(argc != 3)
+    if(argc != 4 && argc != 3)
     {
         printf("Usage : copy <file1><file2>\n");
         exit(0);
@@ -111,9 +124,7 @@ int main(int argc, char *argv[])
     if(isFileLink == 1)
     {
         int isLFile = isContainL(argc, argv);
-        printf("%s, %s \n", argv[1], argv[2]);
         if(isLFile == 1) copyLink(argv[1], argv[2]); //if the link contain -l then we copy the content of the link
-        //else regularCopy(argv[1], argv[2]); //if the link does not contain -l then we copy the file linked by the symbolic link
         else copyConten(argv[1], argv[2]); //if the link does not contain -l then we copy the file linked by the symbolic link
     }
     else

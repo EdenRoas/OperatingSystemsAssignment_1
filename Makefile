@@ -44,4 +44,26 @@ decode: decode.o codec2.so codec1.so
 		$(CC) $(FLAGS) -o decode decode.o ./codec1.so ./codec2.so -lm
 
 # dynamic library
-Code2: codec2.o
+Code2: codec2.o
+	$(CC) -shared -o codec2.so codec2.o
+# dynamic library
+Code1: codec1.o
+	$(CC) -shared -o codec1.so codec1.o
+
+codec2.o: codec2.c codec.h
+	$(CC) $(FLAGS) -c codec2.c
+
+codec1.o: codec1.c codec.h
+	$(CC) $(FLAGS) -c codec1.c
+
+encode.o: encode.c codec.h
+	$(CC) $(FLAGS) -c encode.c
+
+decode.o: decode.c codec.h
+	$(CC) $(FLAGS) -c decode.c
+
+#make clean
+.PHONY: clean all
+
+ clean:
+	rm -f encode decode copy cmp *.a *.so *.o

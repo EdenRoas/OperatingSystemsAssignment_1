@@ -54,24 +54,3 @@ int decode(char * src, char * dst, int len)
     dst[indexd] = '\0';
     return 1;
 }
-
-int main(int argc, char *argv[])
-{
-    int len = strlen(argv[1]);
-    char * msgToEncode = malloc(len * 5);
-    char msgToDecode[len];
-    encode(argv[1], msgToEncode, len);
-    for (int i = 0; i < strlen(msgToEncode); i++)
-    {
-        printf("%c", msgToEncode[i]);
-    }
-    //printf("%d\n" , str);
-    printf("\n");
-    decode(msgToEncode,msgToDecode,strlen(msgToEncode));
-    for (int i = 0; i < strlen(msgToDecode); i++)
-    {
-        printf("%c", msgToDecode[i]);
-    }
-    printf("\n");
-    return 0;
-}
