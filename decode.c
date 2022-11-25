@@ -8,12 +8,15 @@ int main(int argc, char *argv[])
 {
     //using those links: https://man7.org/linux/man-pages/man3/dlsym.3.html
     //https://man7.org/linux/man-pages/man3/dlopen.3.html
-    char * libCodec = malloc(12 * sizeof(char));
-    libCodec[0] = '.';
-    libCodec[1] = '/';
-    char * finalSO = ".so";
-    strcat(libCodec, argv[1]);
-    strcat(libCodec, finalSO);
+    char libCodec[12];
+    if(strcmp(argv[1], "codec1"))
+    {
+        strcpy(libCodec,"./codec1.so");
+    }
+    if(strcmp(argv[1], "codec2"))
+    {
+       strcpy(libCodec,"./codec2.so");
+    }
     void * handle = dlopen(libCodec, RTLD_NOW);
     if (!handle) {
         fprintf(stderr, "%s\n", dlerror());
@@ -39,8 +42,6 @@ int main(int argc, char *argv[])
     }
 
     dlclose(handle);
-    close(libCodec);
-    close(dst);
 
     return 0;
 }
