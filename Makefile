@@ -4,7 +4,7 @@
 
 # encode.c, decode.c, codec1.c codec2.c codec.h, cmp.c , copy.c
 CC = gcc
-FLAGS = -Wall -g
+FLAGS = -Wall -g -Wl,--no-as-needed -ldl
 AR= ar
 
 
