@@ -31,7 +31,9 @@ The file created after the prgram running:
 ![image](https://user-images.githubusercontent.com/86705118/203872008-1856c009-702e-479a-82f6-afe0933cc4a0.png)
 ![image](https://user-images.githubusercontent.com/86705118/203871966-cff9567d-45fb-4aa8-8ba8-2e0489b9f486.png)
 
+codec/decode-
 
+![image](https://user-images.githubusercontent.com/86705118/204111025-0b1c141f-fcde-4cb0-8a5b-54b9f44129f3.png)
 
 
 ## THE URL WE USED :
