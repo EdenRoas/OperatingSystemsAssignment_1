@@ -65,6 +65,7 @@ codec/decode-
  + **Encode.c & Decode.c**:
  * https://man7.org/linux/man-pages/man3/dlsym.3.html 
  * https://man7.org/linux/man-pages/man3/dlopen.3.html 
+ * https://linux.die.net/man/3/dlsym
 
 
   + **Codec.h**:
