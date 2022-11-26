@@ -54,3 +54,12 @@ int decode(char * src, char * dst, int len)
     dst[indexd] = '\0';
     return 1;
 }
+
+// int main(int argc, char  *argv[])
+// {
+//    char * msg = "hello";
+//    char * dst = malloc(strlen(msg));
+//    encode(msg, dst, strlen(msg));
+//    printf("%s\n", dst);
+//     return 0;
+// }

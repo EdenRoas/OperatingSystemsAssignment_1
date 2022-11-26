@@ -7,12 +7,12 @@
 
 int codec1_encode(char * src, char * dst, int len)
 {
-    return encodeDecodeCodec1(src, dst, len);
+    return encodeDecode1(src, dst, len);
 };
 
 int codec1_decode(char * src, char * dst, int len)
 {
-    return encodeDecodeCodec1(src, dst, len);
+    return encodeDecode1(src, dst, len);
 };
 
 int codec2_encode(char * src, char * dst, int len)

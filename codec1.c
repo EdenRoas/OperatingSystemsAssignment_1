@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-int encodeDecodeCodec1(char * src, char * dst, int len)
+int encodeDecode1(char * src, char * dst, int len)
 {
     for (int i = 0; i < len; i++)
     {   
@@ -15,7 +15,7 @@ int encodeDecodeCodec1(char * src, char * dst, int len)
         {
             dst[i] = tolower(src[i]);
         }
-        else
+        if(!isalpha(src[i]))
         {
             dst[i] = src[i];
         }

@@ -17,13 +17,13 @@ int main(int argc, char *argv[])
     {
        strcpy(libCodec,"./codec2.so");
     }
-    void * handle = dlopen(libCodec, RTLD_NOW);
+    void * handle = dlopen(libCodec, RTLD_NOW | RTLD_LAZY);
     if (!handle) {
         fprintf(stderr, "%s\n", dlerror());
         exit(EXIT_FAILURE);
     }
     //getting the address where function is loaded into memory
-    void (*functionPointer)(char * src, char * dst, int len);
+    int (*functionPointer)(char * src, char * dst, int len);
     
     //prepering a place to insert the output of the function
     char * dst = malloc(strlen(argv[2]) * sizeof(char));
@@ -31,17 +31,23 @@ int main(int argc, char *argv[])
     //checking which function we need to operate
     if(strcmp(argv[1], "codec1") == 0)
     {
-        functionPointer = dlsym(handle, "codec1_decode");
+        functionPointer = dlsym(handle, "encodeDecode1");
         functionPointer(argv[2], dst, strlen(argv[2]));
     }
 
     if(strcmp(argv[1], "codec2") == 0)
     {
-        functionPointer = dlsym(handle, "codec2_decode");
+        functionPointer = dlsym(handle, "decode");
         functionPointer(argv[2], dst, strlen(argv[2]));
     }
 
-    dlclose(handle);
+    printf("%s\n", dst);
+    
+    free(dst);
+    if (dlclose(handle)!=0) //returns 0 on success
+    {
+        printf("error\n");
+    }
 
     return 0;
 }
